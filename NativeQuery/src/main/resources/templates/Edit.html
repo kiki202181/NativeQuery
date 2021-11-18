@@ -5,6 +5,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<form th:action="@{/save}" th:object=${User} method="post">
+		<label	for="user">name:</label> 
+		<input type="text"	th:field="${User.name}"> 
+		<button>save</button>
+	</form>
 </body>
 </html>
