@@ -8,8 +8,8 @@
 
 
 	<form th:action="@{/search}" th:object=${User} method="post">
-		<label for="user">name:</label> <input type="text"
-			th:field="${User.name}">
+		<label for="name">name:</label> 
+		<input type="text"	th:field="${User.name}">
 		<button>search</button>
 	</form>
 
@@ -36,15 +36,6 @@
 				</form></td>
 		</tr>
 	</table>
-
-
-
-
-
-
-
-
-
 
 
 
