@@ -6,10 +6,9 @@
 </head>
 <body>
 
-
 	<form th:action="@{/search}" th:object=${User} method="post">
 		<label for="name">name:</label> 
-		<input type="text"	th:field="${User.name}">
+		<input type="text"	name="name" id="name">
 		<button>search</button>
 	</form>
 
@@ -19,10 +18,10 @@
 
 			<th>id</th>
 			<th>user</th>
-			<th></th>
+
 
 		</tr>
-		<tr th:each="User:${UserList}" th:object=${User>
+		<tr th:each="User:${UserList}" th:object=${User}>
 
 			<td th:text="${User.id}"></td>
 			<td th:text="${User.name}"></td>
@@ -34,7 +33,11 @@
 			<td><form th:action="@{'/delete/'+${id}}" method="post">
 					<button>delete</button>
 				</form></td>
+
+
 		</tr>
+
+
 	</table>
 
 
