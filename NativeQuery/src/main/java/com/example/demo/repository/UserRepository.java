@@ -33,7 +33,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@Transactional
 	@Modifying
-	@Query(value = "SELECT * FROM user_tb WHERE name LIKE '% ?1 %'", nativeQuery = true)
+	@Query(value = "SELECT * FROM user_tb WHERE name LIKE %?1%", nativeQuery = true)
 	List<User> searchUser(@Param("name") String name);
 
 	@Transactional
