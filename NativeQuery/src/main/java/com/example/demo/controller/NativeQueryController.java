@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
@@ -22,21 +24,44 @@ public class NativeQueryController {
 	@Autowired
 	UserRepository userRepository;
 	List<User> UserList;
-	
+
 	@GetMapping("/")
 	public String view(Model model) {
-		//全取得
-		UserList=userRepository.findAllUser();
-		model.addAttribute("UserList",UserList);
-		
-		
+		// 全取得
+		UserList = userRepository.findAllUser();
+		model.addAttribute("UserList", UserList);
+
 		return "View";
 	}
-	
-	@PostMapping("/search")
-	public String edit(Model model) {
 
+	@PostMapping("/add")
+	public String add(Model model) {
+		model.addAttribute("User", new User());
 		return "Edit";
 	}
-	
+
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable(value = "id", required = false) Long id) {
+
+		int result=userRepository.deleteUser(id);
+		System.out.println(result);
+		return "redirect:/";
+	}
+
+	@PostMapping("/save")
+	public String save(@RequestParam(value = "name", required = false, defaultValue = "%") String name, Model model) {
+		userRepository.addUser(name);
+		UserList = userRepository.findAllUser();
+		model.addAttribute("UserList", UserList);
+		return "View";
+	}
+
+	@PostMapping("/search")
+	public String edit(@RequestParam(value = "name", required = false, defaultValue = "%") String name, Model model) {
+		System.out.println(name);
+		UserList = userRepository.searchUser(name);
+		model.addAttribute("UserList", UserList);
+		return "View";
+	}
+
 }
