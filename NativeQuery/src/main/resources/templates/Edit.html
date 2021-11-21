@@ -6,8 +6,11 @@
 </head>
 <body>
 	<form th:action="@{/save}" th:object=${User} method="post">
-		<label for="name">name:</label> <input type="text" name="name"
-			id="name">
+		
+		<input type="hidden" th:field="*{id}"> 
+		
+		<label for="name">name:</label>
+		<input type="text" id="name" th:field="*{name}" th:value="*{name}">
 		<button>save</button>
 	</form>
 </body>

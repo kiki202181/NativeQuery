@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -34,5 +35,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Modifying
 	@Query(value = "SELECT * FROM user_tb WHERE name LIKE '% ?1 %'", nativeQuery = true)
 	List<User> searchUser(@Param("name") String name);
+
+	@Transactional
+	@Modifying
+	@Query(value = "SELECT name FROM user_tb WHERE id=?1", nativeQuery = true)
+	Optional<User> findById(@Param("id") Long id);
 
 }
