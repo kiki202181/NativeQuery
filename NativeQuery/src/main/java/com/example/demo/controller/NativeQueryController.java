@@ -28,7 +28,6 @@ public class NativeQueryController {
 
 	@GetMapping("/")
 	public String view(Model model) {
-		// 全取得
 		UserList = userRepository.findAllUser();
 		model.addAttribute("UserList", UserList);
 
@@ -60,8 +59,12 @@ public class NativeQueryController {
 	@PostMapping("/save")
 	public String save(@ModelAttribute User user, Model model) {
 
-		System.out.println(user.getId());
-//		userRepository.addUser(name);
+		if (user.getId()==null) {
+			userRepository.addUser(user.getName());
+		}else {
+			userRepository.saveUser(user.getName(), user.getId());
+		}
+
 		UserList = userRepository.findAllUser();
 		model.addAttribute("UserList", UserList);
 		return "View";
