@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>User</title>
 </head>
 <body>
 
@@ -27,7 +27,7 @@
 			<td th:text="${User.name}"></td>
 
 			<td><form th:action="@{'/edit/'+${User.id}}" method="post">
-<button>edit</button>
+					<button>edit</button>
 				</form></td>
 
 			<td><form th:action="@{'/delete/'+${User.id}}" method="post">
